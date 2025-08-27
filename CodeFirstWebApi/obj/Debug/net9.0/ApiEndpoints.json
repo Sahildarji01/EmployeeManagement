@@ -1,0 +1,207 @@
+[
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.DepartmentController",
+    "Method": "AddDepartment",
+    "RelativePath": "api/DepartmentController/add-details",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CodeFirstWebApi.Models.DTO.DepartmentDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.DepartmentController",
+    "Method": "deleteDetailsById",
+    "RelativePath": "api/DepartmentController/delete-details",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.DepartmentController",
+    "Method": "UpdateDepartmentDetailsById",
+    "RelativePath": "api/DepartmentController/update-details",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "details",
+        "Type": "CodeFirstWebApi.Models.DTO.DepartmentDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.DepartmentController",
+    "Method": "GetDepartmentDetails",
+    "RelativePath": "api/Depatment-details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "AddBasicInfo",
+    "RelativePath": "api/EmployeeController/basic-info",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "basicInfoDto",
+        "Type": "CodeFirstWebApi.Models.DTO.EmployeeBasicInfoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "CreateEmployee",
+    "RelativePath": "api/EmployeeController/CreateEmployee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "obj",
+        "Type": "CodeFirstWebApi.Models.Employee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "DeleteEmployee",
+    "RelativePath": "api/EmployeeController/DeleteEmployee",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "GetEmployeeList",
+    "RelativePath": "api/EmployeeController/GetEmployeeList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "GetEmployeeListById",
+    "RelativePath": "api/EmployeeController/GetEmployeeListById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "UpdateEmployeeDetails",
+    "RelativePath": "api/EmployeeController/UpdateEmployeeDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "obj",
+        "Type": "CodeFirstWebApi.Models.Employee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.JobController",
+    "Method": "AddJobDetails",
+    "RelativePath": "api/JobController/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CodeFirstWebApi.Models.DTO.JobDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.JobController",
+    "Method": "GetJobDetails",
+    "RelativePath": "api/JobController/job-details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.JobController",
+    "Method": "UpdateDetailsById",
+    "RelativePath": "api/JobController/update-details",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "CodeFirstWebApi.Models.DTO.JobDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
