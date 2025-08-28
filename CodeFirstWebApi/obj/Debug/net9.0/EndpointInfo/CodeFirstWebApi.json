@@ -111,7 +111,7 @@
         }
       }
     },
-    "/api/EmployeeController/GetEmployeeList": {
+    "/api/Employee/GetEmployeeList": {
       "get": {
         "tags": [
           "Employee"
@@ -123,15 +123,16 @@
         }
       }
     },
-    "/api/EmployeeController/GetEmployeeListById": {
+    "/api/Employee/GetEmployeeListById/{EmployeeId}": {
       "get": {
         "tags": [
           "Employee"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "EmployeeId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -145,7 +146,7 @@
         }
       }
     },
-    "/api/EmployeeController/CreateEmployee": {
+    "/api/Employee/CreateEmployee": {
       "post": {
         "tags": [
           "Employee"
@@ -176,7 +177,7 @@
         }
       }
     },
-    "/api/EmployeeController/basic-info": {
+    "/api/Employee/basic-info": {
       "post": {
         "tags": [
           "Employee"
@@ -207,15 +208,16 @@
         }
       }
     },
-    "/api/EmployeeController/UpdateEmployeeDetails": {
+    "/api/Employee/UpdateEmployeeDetails/{EmployeeId}": {
       "put": {
         "tags": [
           "Employee"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "EmployeeId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -248,21 +250,64 @@
         }
       }
     },
-    "/api/EmployeeController/DeleteEmployee": {
+    "/api/Employee/DeleteEmployee/{EmployeeId}": {
       "delete": {
         "tags": [
           "Employee"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "EmployeeId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee/UpdateProfile/{EmployeeId}": {
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeProfileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeProfileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeProfileDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -347,6 +392,127 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/ApplyLeave": {
+      "post": {
+        "tags": [
+          "Leave"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/UpdateLeaveStatus": {
+      "put": {
+        "tags": [
+          "Leave"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveStatusDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveStatusDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAuth/Register": {
+      "post": {
+        "tags": [
+          "UserAuth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUpPasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUpPasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUpPasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserAuth/Login": {
+      "get": {
+        "tags": [
+          "UserAuth"
+        ],
+        "parameters": [
+          {
+            "name": "EmailId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -536,6 +702,24 @@
         },
         "additionalProperties": false
       },
+      "EmployeeProfileDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
       "JobDetailsDto": {
         "type": "object",
         "properties": {
@@ -568,22 +752,77 @@
         },
         "additionalProperties": false
       },
+      "LeaveDto": {
+        "type": "object",
+        "properties": {
+          "employeeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leaveType": {
+            "$ref": "#/components/schemas/LeaveType"
+          },
+          "leaveReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "leaveStartDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "leaveEndDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
       "LeaveStatus": {
         "enum": [
-          0,
-          1,
-          2
+          "PENDING",
+          "APPROVED",
+          "REJECTED"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
+      },
+      "LeaveStatusDto": {
+        "type": "object",
+        "properties": {
+          "leaveId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/LeaveStatus"
+          },
+          "approvedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "rejectedOn": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rejectedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "LeaveType": {
         "enum": [
-          0,
-          1
+          "FIRST_HALF",
+          "SECOND_HALF",
+          "FULL_DAY"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "Leave_Details": {
         "required": [
@@ -602,11 +841,11 @@
           },
           "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "endDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "reason": {
             "type": "string",
@@ -621,6 +860,41 @@
           },
           "employee": {
             "$ref": "#/components/schemas/Employee"
+          },
+          "applyOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rejectedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "rejectedOn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetUpPasswordDto": {
+        "type": "object",
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -664,12 +938,11 @@
       },
       "UserRole": {
         "enum": [
-          0,
-          1,
-          2
+          "SUPER_ADMIN",
+          "ADMIN",
+          "EMPLOYEE"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       }
     }
   }

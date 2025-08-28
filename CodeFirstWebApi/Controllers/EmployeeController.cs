@@ -1,13 +1,13 @@
 ﻿using CodeFirstWebApi.Data;
 using CodeFirstWebApi.Models;
 using CodeFirstWebApi.Models.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstWebApi.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
         private readonly EmployeeDbContext db;
@@ -16,30 +16,28 @@ namespace CodeFirstWebApi.Controllers
         {
             this.db = context;
         }
-        [HttpGet]
-        [Route("api/EmployeeController/GetEmployeeList")]
+
+        [HttpGet("GetEmployeeList")]
         public async Task<IActionResult> GetEmployeeList()
         {
-            var employee = await db.Employee_details.ToListAsync();
-            return Ok(employee);
+            var employees = await db.Employee_details.ToListAsync();
+            return Ok(employees);
         }
-        [HttpGet]
-        [Route("api/EmployeeController/GetEmployeeListById")]
-        public async Task<IActionResult> GetEmployeeListById(int id)
+
+        [HttpGet("GetEmployeeListById/{EmployeeId}")]
+        public async Task<IActionResult> GetEmployeeListById(int EmployeeId)
         {
-            var employee = await db.Employee_details.FindAsync(id);
-            if (id == null)
+            var employee = await db.Employee_details.FindAsync(EmployeeId);
+            if (employee == null)
             {
                 return NotFound();
             }
             return Ok(employee);
         }
 
-        [HttpPost]
-        [Route("api/EmployeeController/CreateEmployee")]
-        public async Task<IActionResult> CreateEmployee(Employee obj)
+        [HttpPost("CreateEmployee")]
+        public async Task<IActionResult> CreateEmployee([FromBody] Employee obj)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest("Model is not valid");
@@ -51,14 +49,12 @@ namespace CodeFirstWebApi.Controllers
             return Ok(obj);
         }
 
-        [HttpPost]
-        [Route("api/EmployeeController/basic-info")]
+        [HttpPost("basic-info")]
         public async Task<IActionResult> AddBasicInfo([FromBody] EmployeeBasicInfoDto basicInfoDto)
         {
             if (!ModelState.IsValid)
             {
-
-                return BadRequest("Data Is Not Valid");
+                return BadRequest("Data is not valid");
             }
 
             var basicInfo = new Employee
@@ -72,41 +68,72 @@ namespace CodeFirstWebApi.Controllers
                 DepartmentId = basicInfoDto.DepartmentId,
                 JobId = basicInfoDto.JobId,
             };
+
             db.Employee_details.Add(basicInfo);
             await db.SaveChangesAsync();
+
             return Ok(basicInfo);
         }
 
-        [HttpPut]
-        [Route("api/EmployeeController/UpdateEmployeeDetails")]
-        public async Task<IActionResult> UpdateEmployeeDetails(int id, Employee obj)
+        [HttpPut("UpdateEmployeeDetails/{EmployeeId}")]
+        public async Task<IActionResult> UpdateEmployeeDetails(int EmployeeId, [FromBody] Employee obj)
         {
-
-            if (id != obj.EmployeeId)
+            if (EmployeeId != obj.EmployeeId)
             {
-
                 return BadRequest("Employee id mismatch!");
             }
+
             db.Entry(obj).State = EntityState.Modified;
             await db.SaveChangesAsync();
 
             return Ok(obj);
         }
 
-        [HttpDelete]
-        [Route("api/EmployeeController/DeleteEmployee")]
-        public async Task<IActionResult> DeleteEmployee(int id)
+        [HttpDelete("DeleteEmployee/{EmployeeId}")]
+        public async Task<IActionResult> DeleteEmployee(int EmployeeId)
         {
-
-            var employee = db.Employee_details.Find(id);
+            var employee = await db.Employee_details.FindAsync(EmployeeId);
             if (employee == null)
             {
-
                 return NotFound();
             }
+
             db.Employee_details.Remove(employee);
             await db.SaveChangesAsync();
+
             return Ok(employee);
+        }
+
+        [HttpPut("UpdateProfile/{EmployeeId}")]
+        public async Task<IActionResult> UpdateEmployeeProfile(int EmployeeId, [FromBody] EmployeeProfileDto profileDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            var employee = await db.Employee_details.FindAsync(EmployeeId);
+
+            if (employee == null)
+            {
+                return NotFound("Employee not found");
+            }
+
+            employee.FullName = profileDto.FullName;
+            employee.PhoneNumber = profileDto.PhoneNumber;
+            employee.DateOfBirth = profileDto.DateOfBirth;
+
+            db.Entry(employee).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Message = "Profile updated successfully",
+                employee.EmployeeId,
+                employee.FullName,
+                employee.PhoneNumber,
+                employee.DateOfBirth
+            });
         }
     }
 }

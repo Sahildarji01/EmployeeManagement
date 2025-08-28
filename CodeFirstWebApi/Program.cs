@@ -1,15 +1,30 @@
 using CodeFirstWebApi.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 builder.Services.AddDbContext<EmployeeDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs"),
-        sqlOptions => sqlOptions.CommandTimeout(300))
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("dbcs"),
+        sqlOptions =>
+        {
+            sqlOptions.CommandTimeout(300);  
+            sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+        }
+    )
 );
-builder.Services.AddControllers();
+
+
+//builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

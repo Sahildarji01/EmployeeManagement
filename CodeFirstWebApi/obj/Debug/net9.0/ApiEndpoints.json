@@ -65,7 +65,7 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "AddBasicInfo",
-    "RelativePath": "api/EmployeeController/basic-info",
+    "RelativePath": "api/Employee/basic-info",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -81,7 +81,7 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "CreateEmployee",
-    "RelativePath": "api/EmployeeController/CreateEmployee",
+    "RelativePath": "api/Employee/CreateEmployee",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -97,15 +97,15 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "DeleteEmployee",
-    "RelativePath": "api/EmployeeController/DeleteEmployee",
+    "RelativePath": "api/Employee/DeleteEmployee/{EmployeeId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "EmployeeId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -113,7 +113,7 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "GetEmployeeList",
-    "RelativePath": "api/EmployeeController/GetEmployeeList",
+    "RelativePath": "api/Employee/GetEmployeeList",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -123,15 +123,15 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "GetEmployeeListById",
-    "RelativePath": "api/EmployeeController/GetEmployeeListById",
+    "RelativePath": "api/Employee/GetEmployeeListById/{EmployeeId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "EmployeeId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -139,19 +139,40 @@
   {
     "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
     "Method": "UpdateEmployeeDetails",
-    "RelativePath": "api/EmployeeController/UpdateEmployeeDetails",
+    "RelativePath": "api/Employee/UpdateEmployeeDetails/{EmployeeId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "EmployeeId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "obj",
         "Type": "CodeFirstWebApi.Models.Employee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.EmployeeController",
+    "Method": "UpdateEmployeeProfile",
+    "RelativePath": "api/Employee/UpdateProfile/{EmployeeId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "profileDto",
+        "Type": "CodeFirstWebApi.Models.DTO.EmployeeProfileDto",
         "IsRequired": true
       }
     ],
@@ -199,6 +220,75 @@
       {
         "Name": "dto",
         "Type": "CodeFirstWebApi.Models.DTO.JobDetailsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.LeaveController",
+    "Method": "ApplyLeave",
+    "RelativePath": "api/Leave/ApplyLeave",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CodeFirstWebApi.Models.DTO.LeaveDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.LeaveController",
+    "Method": "UpdateLeaveDecision",
+    "RelativePath": "api/Leave/UpdateLeaveStatus",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "CodeFirstWebApi.Models.DTO.LeaveStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.UserAuthController",
+    "Method": "EmployeeLogin",
+    "RelativePath": "api/UserAuth/Login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmailId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeFirstWebApi.Controllers.UserAuthController",
+    "Method": "SetUpPassword",
+    "RelativePath": "api/UserAuth/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "passwordDto",
+        "Type": "CodeFirstWebApi.Models.DTO.SetUpPasswordDto",
         "IsRequired": true
       }
     ],

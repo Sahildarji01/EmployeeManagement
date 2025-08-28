@@ -2,7 +2,8 @@
 {
     public enum LeaveType
     {
-        HALF_DAY,
+        FIRST_HALF,
+        SECOND_HALF,
         FULL_DAY
     }
 }

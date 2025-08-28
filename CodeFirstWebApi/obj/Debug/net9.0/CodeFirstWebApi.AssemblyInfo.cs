@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeFirstWebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b82b66ecc41271d3f8e2c57d45d605f478172aae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4eaa5a6c051d80bbdd3dc04377cb75ab9db59f51")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeFirstWebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeFirstWebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
