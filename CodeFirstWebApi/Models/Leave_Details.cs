@@ -25,10 +25,10 @@ namespace CodeFirstWebApi.Models
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
         public DateTime ApplyOn { get; set; } = DateTime.UtcNow;
-        public string ApprovedBy { get; set; }
-        public DateTime ApprovedOn { get; set; }
+        public string? ApprovedBy { get; set; }
+        public DateTime? ApprovedOn { get; set; }
 
-        public string RejectedBy { get; set; }
-        public DateTime RejectedOn { get; set; }
+        public string? RejectedBy { get; set; }
+        public DateTime? RejectedOn { get; set; }
     }
 }

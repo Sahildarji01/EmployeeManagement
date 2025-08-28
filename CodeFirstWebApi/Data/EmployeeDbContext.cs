@@ -21,5 +21,21 @@ namespace CodeFirstWebApi.Data
         public DbSet<Department_Details> Department_Details  { get; set; }
 
         public DbSet<Job_Details> JOb_Details { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Leave_Details>()
+                .Property(l => l.Status)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Leave_Details>()
+                .Property(l => l.LeaveType)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<UserAuth>()
+                .Property(u => u.Role)
+                .HasConversion<string>();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
