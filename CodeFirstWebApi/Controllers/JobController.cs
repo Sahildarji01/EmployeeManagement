@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstWebApi.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class JobController : ControllerBase
     {
@@ -19,8 +20,7 @@ namespace CodeFirstWebApi.Controllers
             this.db = context;
         }
 
-        [Route("api/JobController/job-details")]
-        [HttpGet]
+        [HttpGet("all-details")]
         public async Task<IActionResult> GetJobDetails()
         {
 
@@ -28,8 +28,7 @@ namespace CodeFirstWebApi.Controllers
             return Ok(jobDetails);
         }
 
-        [Route("api/JobController/add")]
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> AddJobDetails([FromBody] JobDetailsDto dto)
         {
 
@@ -51,8 +50,7 @@ namespace CodeFirstWebApi.Controllers
         }
 
 
-        [Route("api/JobController/update-details")]
-        [HttpPut]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateDetailsById(int id, [FromBody] JobDetailsDto dto)
         {
             if (!ModelState.IsValid)

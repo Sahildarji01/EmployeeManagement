@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstWebApi.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class UserAuthController : ControllerBase
     {
@@ -16,8 +17,7 @@ namespace CodeFirstWebApi.Controllers
             this.db = context;
         }
 
-        [Route("api/UserAuth/Register")]
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> SetUpPassword([FromBody] SetUpPasswordDto passwordDto)
         {
             if (!ModelState.IsValid)
@@ -56,8 +56,7 @@ namespace CodeFirstWebApi.Controllers
             return Ok("Password setup successful. You can now login.");
         }
 
-        [Route("api/UserAuth/Login")]
-        [HttpGet]
+        [HttpGet("login")]
         public async Task<IActionResult> EmployeeLogin([FromQuery] string EmailId, [FromQuery] string Password)
         {
             if (!ModelState.IsValid)

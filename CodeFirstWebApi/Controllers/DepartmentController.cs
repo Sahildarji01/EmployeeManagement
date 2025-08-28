@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstWebApi.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class DepartmentController : ControllerBase
     {
@@ -18,16 +19,14 @@ namespace CodeFirstWebApi.Controllers
         }
 
 
-        [Route("api/Depatment-details")]
-        [HttpGet]
+        [HttpGet("departmnet-details")]
         public async Task<IActionResult> GetDepartmentDetails() {
 
             var department = await db.Department_Details.ToListAsync();
             return Ok(department);
         }
 
-        [Route("api/DepartmentController/add-details")]
-        [HttpPost]
+        [HttpPost("add-details")]
         public async Task<IActionResult> AddDepartment([FromBody] DepartmentDetailsDto dto)
         {
             if (!ModelState.IsValid)
@@ -45,8 +44,7 @@ namespace CodeFirstWebApi.Controllers
             return CreatedAtAction(nameof(GetDepartmentDetails), new { id = department.DepartmentId }, department);
         }
 
-        [Route("api/DepartmentController/update-details")]
-        [HttpPut]
+        [HttpPut("update-details")]
         public async Task<IActionResult> UpdateDepartmentDetailsById(int id ,[FromBody]DepartmentDetailsDto details){
             if (!ModelState.IsValid) { 
                 return BadRequest("DepartmentId is not valid!");
@@ -66,8 +64,7 @@ namespace CodeFirstWebApi.Controllers
 
             }
 
-        [Route("api/DepartmentController/delete-details")]
-        [HttpDelete]
+        [HttpDelete("remove-department")]
         public async Task<IActionResult> deleteDetailsById(int id) {
 
 
