@@ -13,6 +13,8 @@ namespace CodeFirstWebApi.Models
 
         public DateTime? CheckOutDateAndTime { get; set; }
 
+        public double? TotalHoursWorked { get; set; }
+
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
     }
