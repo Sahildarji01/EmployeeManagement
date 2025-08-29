@@ -32,6 +32,21 @@ namespace CodeFirstWebApi.Controllers
                 return BadRequest($"Employee with ID {dto.EmployeeId} does not exist.");
             }
 
+            if(dto.LeaveStartDate < DateOnly.FromDateTime(DateTime.Today))
+            {
+                return BadRequest("Leave start date cannot be in the past.");
+            }
+
+            if (dto.LeaveEndDate < DateOnly.FromDateTime(DateTime.Today))
+            { 
+                return BadRequest("Leave end date cannot be in the past.");
+            }
+
+            if (dto.LeaveEndDate < dto.LeaveStartDate)
+            {
+                return BadRequest("Leave end date cannot be earlier than start date.");
+            }
+
             var leaveDetails = new Leave_Details
             {
                EmployeeId = dto.EmployeeId,
