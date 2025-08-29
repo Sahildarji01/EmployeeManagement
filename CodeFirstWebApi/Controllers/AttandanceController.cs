@@ -1,5 +1,6 @@
 ﻿using CodeFirstWebApi.Data;
 using CodeFirstWebApi.Models;
+using CodeFirstWebApi.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -73,14 +74,29 @@ namespace CodeFirstWebApi.Controllers
         }
 
         [HttpGet("employee/{employeeId}")]
-        public async Task<IActionResult> attandanceByEmployeeId(int employeeId)
+        public async Task<IActionResult> AttendanceByEmployeeId(int employeeId)
         {
+            var employeeAttendance = await db.Attandance_Details
+                .Where(a => a.EmployeeId == employeeId)
+                .Select(a => new AttandanceDto
+                {
+                    AttandanceId = a.AttendanceId,
+                    EmployeeId = a.EmployeeId,
+                    CheckInDateTime = a.CheckInDateAndTime,
+                    CheckOutDateTime = a.CheckOutDateAndTime,
+                    TotalHoursWorked = a.CheckOutDateAndTime != null
+                                        ? (a.CheckOutDateAndTime.Value - a.CheckInDateAndTime).TotalHours
+                                        : (double?)null
+                })
+                .ToListAsync();
 
-            var employeeAttandance = await db.Attandance_Details.FindAsync(employeeId);
-            if (employeeAttandance == null)
-                return NotFound("EmployeeId Incorrect.");
+            if (employeeAttendance == null || !employeeAttendance.Any())
+            {
+                return NotFound("No attendance records found for this EmployeeId.");
+            }
 
-            return Ok(employeeAttandance);
+            return Ok(employeeAttendance);
         }
+
     }
 }
